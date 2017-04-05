@@ -7,14 +7,11 @@ public class Conclusion extends Entity {
 	private Conclusion(Declaration declaration) {
 		super(declaration);
 	}
-	
+
 	public static Conclusion getInstance(Declaration declaration) {
-		if (declarationIsValid(declaration) == false)
-			return null;
-		
-		return new Conclusion(declaration);
+		return (declarationIsValid(declaration) == false ? null : new Conclusion(declaration));
 	}
-	
+
 	private static boolean declarationIsValid(Declaration declaration) {
 		// TODO implement it!
 		return false;
