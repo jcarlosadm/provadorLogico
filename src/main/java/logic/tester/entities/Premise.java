@@ -17,4 +17,9 @@ public class Premise extends Entity {
 	public long getID() {
 		return this.id;
 	}
+	
+	@Override
+	public String toString() {
+		return this.id + ") " + this.getDeclaration().toString();
+	}
 }

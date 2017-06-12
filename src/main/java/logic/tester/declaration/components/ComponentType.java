@@ -4,8 +4,8 @@ public enum ComponentType {
 
 	VARIABLE,
 	IMPLIES,
+	EQUIVALENT,
 	OR,
-	AND,
-	PARENTESIS
+	AND
 	
 }
