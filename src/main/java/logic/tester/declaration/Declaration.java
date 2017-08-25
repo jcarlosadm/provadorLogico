@@ -10,7 +10,7 @@ public class Declaration {
 
 	private List<Component> symbols = new ArrayList<>();
 
-	private static final String LEFT_OR_RIGHT_REGEX = "[\\s]*[~]?[a-fA-F][\\s]*";
+	private static final String LEFT_OR_RIGHT_REGEX = "[\\s]*[~]*[a-fA-F][\\s]*";
 	
 	private static final String OR_REGEX = LEFT_OR_RIGHT_REGEX + "[vV]" + LEFT_OR_RIGHT_REGEX;
 	private static final String AND_REGEX = LEFT_OR_RIGHT_REGEX + "\\^" + LEFT_OR_RIGHT_REGEX;
@@ -84,9 +84,13 @@ public class Declaration {
 
 	private int addVariable(String sequence, int index) {
 		if (sequence.charAt(index) == '~') {
-			String string = sequence.substring(index, index + 2);
+			int i = index + 1;
+			while(i < sequence.length() && sequence.charAt(i) == '~')
+				++i;
+			
+			String string = sequence.substring(index, i + 1);
 			this.addSymbol(new Component(string, ComponentType.VARIABLE));
-			return index + 1;
+			return i;
 		} else
 			this.addSymbol(new Component(String.valueOf(sequence.charAt(index)), ComponentType.VARIABLE));
 		

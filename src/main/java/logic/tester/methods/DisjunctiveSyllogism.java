@@ -1,5 +1,8 @@
 package logic.tester.methods;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import logic.tester.declaration.Declaration;
 import logic.tester.declaration.components.Component;
 import logic.tester.declaration.components.ComponentType;
@@ -60,7 +63,12 @@ public class DisjunctiveSyllogism implements Method {
 	}
 
 	@Override
-	public Conclusion conclusion(Premise premise1, Premise premise2) throws Exception {
+	public List<Conclusion> conclusions(Premise ... premises) throws Exception {
+		Premise premise1 = premises[0];
+		Premise premise2 = premises[1];
+		
+		List<Conclusion> conclusions = new ArrayList<>();
+		
 		if (!this.isApplicable(premise1, premise2))
 			return null;
 
@@ -75,8 +83,14 @@ public class DisjunctiveSyllogism implements Method {
 		Conclusion conclusion = new Conclusion(
 				new Declaration(premise.getDeclaration().getComponents().get(indexAnswer).getSymbol()));
 		conclusion.setMessage("silogismo disjuntivo por " + premise1.getID() + " e " + premise2.getID());
+		conclusions.add(conclusion);
 
-		return conclusion;
+		return conclusions;
+	}
+
+	@Override
+	public int getNumberOfPremises() {
+		return 2;
 	}
 
 }
